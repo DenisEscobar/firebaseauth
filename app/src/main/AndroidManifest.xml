@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutentDenis">
         <activity
+            android:name=".LoggedActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

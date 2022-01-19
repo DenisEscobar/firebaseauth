@@ -1,6 +1,7 @@
 package com.example.autentdenis
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -90,6 +91,10 @@ val a=0
 
     private fun updateUI(user: FirebaseUser?) {
         Toast.makeText(baseContext, user.toString(), Toast.LENGTH_SHORT).show()
+        if(user!=null){
+            val intent= Intent(this, LoggedActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun reload() {

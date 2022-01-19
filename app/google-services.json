@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1099344059112",
+    "project_id": "prueva-e8a04",
+    "storage_bucket": "prueva-e8a04.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099344059112:android:3891175904d1752ee4875d",
+        "android_client_info": {
+          "package_name": "com.example.autentdenis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099344059112-es43co3sussj3gsudno6jnn003659gtg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCaDuVm34S-1bSia8M_YSWJLHscKLh9Xw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099344059112-es43co3sussj3gsudno6jnn003659gtg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

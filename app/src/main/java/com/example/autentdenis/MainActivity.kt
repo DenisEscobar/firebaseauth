@@ -22,8 +22,8 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 val a=0
-        val botonAuth = findViewById<Button>(R.id.buttonAuth)
-        botonAuth.setOnClickListener {
+        val buttonAuth = findViewById<Button>(R.id.buttonAuth)
+        buttonAuth.setOnClickListener {
             when (a) {
                 0 -> {
                     signInWithEmailAndPassword("denis.escobar@institutvidreres.cat","123456")

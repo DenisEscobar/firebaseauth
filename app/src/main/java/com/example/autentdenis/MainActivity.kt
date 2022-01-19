@@ -90,7 +90,6 @@ val a=0
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        Toast.makeText(baseContext, user.toString(), Toast.LENGTH_SHORT).show()
         if(user!=null){
             val intent= Intent(this, LoggedActivity::class.java)
             startActivity(intent)

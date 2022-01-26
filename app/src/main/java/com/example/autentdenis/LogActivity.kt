@@ -99,7 +99,7 @@ class LogActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if(user!=null){
-            val intent= Intent(this, LoggedActivity::class.java)
+            val intent= Intent(this, OpcionesActivity::class.java)
             startActivity(intent)
         }
     }

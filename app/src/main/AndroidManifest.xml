@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AutentDenis">
         <activity
+            android:name=".ReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".OpcionesActivity"
             android:exported="false" />
         <activity

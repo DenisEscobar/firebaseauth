@@ -27,12 +27,16 @@ class LogActivity : AppCompatActivity() {
 //        val a=0
         val buttonAuth = findViewById<Button>(R.id.buttonLog)
         binding.button.setOnClickListener {
-        if(!(binding.editTextTextPersonEmail.text.toString().isEmpty() || binding.editTextTextPersonPassword.text.toString().isEmpty())) {
-            signInWithEmailAndPassword(
-                binding.editTextTextPersonEmail.text.toString(),
-                binding.editTextTextPersonPassword.text.toString()
-            )
-        }
+            val intent= Intent(this, OpcionesActivity::class.java)
+            startActivity(intent)
+//        if(!(binding.editTextTextPersonEmail.text.toString().isEmpty() || binding.editTextTextPersonPassword.text.toString().isEmpty())) {
+//            signInWithEmailAndPassword(
+//                binding.editTextTextPersonEmail.text.toString(),
+//                binding.editTextTextPersonPassword.text.toString()
+//            )
+//        }
+
+
 //            when (a) {
 //                0 -> {
 //                    signInWithEmailAndPassword("denis.escobar@institutvidreres.cat","123456")

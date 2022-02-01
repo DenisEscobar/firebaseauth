@@ -50,15 +50,27 @@ class LoggedActivity : AppCompatActivity() {
     }
     fun crear(user: HashMap<String,String>){
         val db = Firebase.firestore
-        db.collection("Users")
-            .document(binding.editTextTextPersonDocument.text.toString())
-            .set(user)
-            .addOnSuccessListener {
+        val database = db.collection("Users").document(binding.editTextTextPersonDocument.text.toString())
+
+        if(database==null) {
+            database.set(user)
+                .addOnSuccessListener {
+                    Log.d(
+                        "TAG",
+                        "DocumentSnapshot successfully written!"
+                    )
+                }
+                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+        }else{
+            database.update(user as Map<String, String>)
+                .addOnSuccessListener {
                 Log.d(
                     "TAG",
                     "DocumentSnapshot successfully written!"
                 )
             }
-            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+
+        }
     }
 }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import com.example.autentdenis.Sharedpref.SharedApp
 import com.example.autentdenis.databinding.ActivityLogBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -30,6 +31,7 @@ class LogActivity : AppCompatActivity() {
             val intent= Intent(this, OpcionesActivity::class.java)
             startActivity(intent)
 //        if(!(binding.editTextTextPersonEmail.text.toString().isEmpty() || binding.editTextTextPersonPassword.text.toString().isEmpty())) {
+//            SharedApp.prefs.email=binding.editTextTextPersonEmail.text.toString()
 //            signInWithEmailAndPassword(
 //                binding.editTextTextPersonEmail.text.toString(),
 //                binding.editTextTextPersonPassword.text.toString()

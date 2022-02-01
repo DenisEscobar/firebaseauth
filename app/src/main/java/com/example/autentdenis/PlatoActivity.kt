@@ -20,7 +20,8 @@ class PlatoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_plato)
-
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_plato
+        )
         val db = Firebase.firestore
         val docRef = db.collection("menu")
         var plato=plato("","")
@@ -34,23 +35,24 @@ class PlatoActivity : AppCompatActivity() {
 
                     Log.d("document1234", "${document.id} => ${document.data} => ${documents.size()}")
 
-                    platos.add(plato(document.id,"5"))
-                    //platos.
-                    //platos!![0].nom=document.id
-//                    platos!![0].preu=document.data.toString()
-                    Log.d("document1234", "1-${platos.get(1)}")
+                    platos.add(plato(document.id,document.data.toString()))
+                    Log.d("document1234", "1-${platos.size}")
                 }
+                for (i in 0..2) {
+                    Log.d("document1234", "${platos.get(i)}")
+                }
+
+                val recyclerView: RecyclerView = binding.recycleview
+                recyclerView.layoutManager= LinearLayoutManager(this)
+                recyclerView.adapter= PlatoAdapter(this, platos)
+
             }
             .addOnFailureListener { exception ->
                 Log.d("ver", "get failed with ", exception)
             }
 
-//for (i in 1..3) {
-//    platos?.get(i)?.let { Log.d("document1234", it.nom) }
-//}
-//        val recyclerView: RecyclerView = findViewById(R.id.recycleview)
-//        recyclerView.layoutManager= LinearLayoutManager(this)
-//        recyclerView.adapter= PlatoAdapter(application, platos!!)
+
+
 
     }
 }

@@ -15,7 +15,7 @@ class ReviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_review)
-
+        buscar()
         val textnom = findViewById<TextView>(R.id.textViewnomplat)
         textnom.text = SharedApp.prefs.name.toString()
         val crear = findViewById<Button>(R.id.crearreview)
@@ -29,6 +29,21 @@ class ReviewActivity : AppCompatActivity() {
         }
 
     }
+    fun buscar() {
+        val db = Firebase.firestore
+        var correu = SharedApp.prefs.email
+        val valoraciones = findViewById<EditText>(R.id.editTextNumber)
+        if (correu != null) {
+            val database =
+                db.collection("review").document(SharedApp.prefs.email!!).collection("menu")
+                    .document(SharedApp.prefs.name.toString()!!)
+            val valoraciones = findViewById<EditText>(R.id.editTextNumber)
+
+            database.get().addOnCompleteListener {
+                valoraciones.setText(it.result?.get("valoracion") as String?)
+            }
+        }
+    }
     fun crear(user: HashMap<String, String>){
         val db = Firebase.firestore
         val database = db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
@@ -41,5 +56,24 @@ class ReviewActivity : AppCompatActivity() {
                 )
             }
             .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+    }
+    fun modificar(user: HashMap<String,String>){
+        val db = Firebase.firestore
+        val database = db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
+
+        database.update(user as Map<String, String>)
+            .addOnSuccessListener {
+                Log.d(
+                    "TAG",
+                    "DocumentSnapshot successfully written!"
+                )
+            }
+            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+    }
+    fun borrar(){
+        val db = Firebase.firestore
+        val database = db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
+            .delete()
+            .addOnSuccessListener {}
     }
 }

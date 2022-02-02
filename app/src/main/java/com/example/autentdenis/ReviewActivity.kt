@@ -2,9 +2,14 @@ package com.example.autentdenis
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import com.example.autentdenis.Sharedpref.SharedApp
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import java.util.HashMap
 
 class ReviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,5 +18,28 @@ class ReviewActivity : AppCompatActivity() {
 
         val textnom = findViewById<TextView>(R.id.textViewnomplat)
         textnom.text = SharedApp.prefs.name.toString()
+        val crear = findViewById<Button>(R.id.crearreview)
+        val valoraciones = findViewById<EditText>(R.id.editTextNumber)
+        crear.setOnClickListener {
+            var nom = valoraciones.text.toString()
+            val user = hashMapOf(
+                "valoracion" to nom
+            )
+            crear(user)
+        }
+
+    }
+    fun crear(user: HashMap<String, String>){
+        val db = Firebase.firestore
+        val database = db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
+
+        database.set(user)
+            .addOnSuccessListener {
+                Log.d(
+                    "TAG",
+                    "DocumentSnapshot successfully written!"
+                )
+            }
+            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
     }
 }

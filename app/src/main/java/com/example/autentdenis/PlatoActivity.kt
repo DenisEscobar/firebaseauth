@@ -32,20 +32,16 @@ class PlatoActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents){
-
-                    Log.d("document1234", "${document.id} => ${document.data} => ${documents.size()}")
-
+//                    Log.d("document1234", "${document.id} => ${document.data} => ${documents.size()}")
                     platos.add(plato(document.id,(document.get("precio").toString()+"€")))
-                    Log.d("document1234", "1-${platos.size}")
+//                    Log.d("document1234", "1-${platos.size}")
                 }
-                for (i in 0..2) {
-                    Log.d("document1234", "${platos.get(i)}")
-                }
-
+//                for (i in 0..2) {
+//                    Log.d("document1234", "${platos.get(i)}")
+//                }
                 val recyclerView: RecyclerView = binding.recycleview
                 recyclerView.layoutManager= LinearLayoutManager(this)
                 recyclerView.adapter= PlatoAdapter(this, platos)
-
             }
             .addOnFailureListener { exception ->
                 Log.d("ver", "get failed with ", exception)

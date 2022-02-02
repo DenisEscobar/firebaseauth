@@ -21,5 +21,9 @@ class OpcionesActivity : AppCompatActivity() {
             val intent= Intent(this, PlatoActivity::class.java)
             startActivity(intent)
         }
+        binding.buttonreviews.setOnClickListener {
+//            val intent= Intent(this, VerReviewActivity::class.java)
+//            startActivity(intent)
+        }
     }
 }

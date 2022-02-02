@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class VerReviewAdapter(private val context: Context,
-                       private val list: ArrayList<plato>,) : RecyclerView.Adapter<VerReviewAdapter.ViewHolder>()  {
+                       private val list: ArrayList<valoracion>,) : RecyclerView.Adapter<VerReviewAdapter.ViewHolder>()  {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val email: TextView = view.findViewById(R.id.textViewreview2)
@@ -24,8 +24,8 @@ class VerReviewAdapter(private val context: Context,
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data = list[position]
-        holder.email.text=data.nom
-        holder.nom.text=data.preu
-        holder.valoracion.text=data.preu
+        holder.email.text=data.email
+        holder.nom.text=data.nom
+        holder.valoracion.text=data.valoracion
     }
 }

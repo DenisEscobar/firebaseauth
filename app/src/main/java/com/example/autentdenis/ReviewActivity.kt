@@ -27,7 +27,18 @@ class ReviewActivity : AppCompatActivity() {
             )
             crear(user)
         }
-
+        val modificar = findViewById<Button>(R.id.modificarreview)
+        modificar.setOnClickListener {
+            var nom = valoraciones.text.toString()
+            val user = hashMapOf(
+                "valoracion" to nom
+            )
+            modificar(user)
+        }
+        val borrar = findViewById<Button>(R.id.borrarreview)
+        borrar.setOnClickListener {
+            borrar()
+        }
     }
     fun buscar() {
         val db = Firebase.firestore
@@ -35,10 +46,10 @@ class ReviewActivity : AppCompatActivity() {
         val valoraciones = findViewById<EditText>(R.id.editTextNumber)
         if (correu != null) {
             val database =
-                db.collection("review").document(SharedApp.prefs.email!!).collection("menu")
+                db.collection("review")
+                    .document(SharedApp.prefs.email!!)
+                    .collection("menu")
                     .document(SharedApp.prefs.name.toString()!!)
-            val valoraciones = findViewById<EditText>(R.id.editTextNumber)
-
             database.get().addOnCompleteListener {
                 valoraciones.setText(it.result?.get("valoracion") as String?)
             }
@@ -72,7 +83,7 @@ class ReviewActivity : AppCompatActivity() {
     }
     fun borrar(){
         val db = Firebase.firestore
-        val database = db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
+        db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
             .delete()
             .addOnSuccessListener {}
     }

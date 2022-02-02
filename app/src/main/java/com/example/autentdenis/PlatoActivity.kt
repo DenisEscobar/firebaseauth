@@ -35,7 +35,7 @@ class PlatoActivity : AppCompatActivity() {
 
                     Log.d("document1234", "${document.id} => ${document.data} => ${documents.size()}")
 
-                    platos.add(plato(document.id,document.data.toString()))
+                    platos.add(plato(document.id,(document.get("precio").toString()+"€")))
                     Log.d("document1234", "1-${platos.size}")
                 }
                 for (i in 0..2) {

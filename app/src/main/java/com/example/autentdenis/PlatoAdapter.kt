@@ -31,7 +31,7 @@ class PlatoAdapter(private val context: Context,
 
         holder.itemView.setOnClickListener{
             SharedApp.prefs.name=data.nom
-            val intent= Intent(this.context, LoggedActivity::class.java)
+            val intent= Intent(this.context, ReviewActivity::class.java)
             this.context.startActivity(intent)
         }
     }

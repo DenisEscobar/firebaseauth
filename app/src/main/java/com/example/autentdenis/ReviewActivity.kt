@@ -1,5 +1,6 @@
 package com.example.autentdenis
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,6 +39,11 @@ class ReviewActivity : AppCompatActivity() {
         val borrar = findViewById<Button>(R.id.borrarreview)
         borrar.setOnClickListener {
             borrar()
+        }
+        val foto = findViewById<Button>(R.id.buttonfoto)
+        foto.setOnClickListener {
+            val intent= Intent(this, ImgActivity::class.java)
+            startActivity(intent)
         }
     }
     fun buscar() {

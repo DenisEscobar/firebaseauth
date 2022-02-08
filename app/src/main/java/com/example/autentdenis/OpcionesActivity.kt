@@ -22,8 +22,8 @@ class OpcionesActivity : AppCompatActivity() {
             startActivity(intent)
         }
         binding.buttonreviews.setOnClickListener {
-//            val intent= Intent(this, VerReviewActivity::class.java)
-//            startActivity(intent)
+            val intent= Intent(this, VerReviewActivity::class.java)
+            startActivity(intent)
         }
     }
 }

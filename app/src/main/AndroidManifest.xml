@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.autentdenis">
 
+    <!--
+    <uses-permission android:name="android.permission.INTERNET" />
+    -->
+
     <application
         android:name=".Sharedpref.SharedApp"
         android:allowBackup="true"
@@ -10,6 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AutentDenis">
+        <activity
+            android:name=".ImgActivity"
+            android:exported="false" />
         <activity
             android:name=".VerReviewActivity"
             android:exported="false" />

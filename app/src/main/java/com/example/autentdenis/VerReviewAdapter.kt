@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class VerReviewAdapter(private val context: Context,
                        private val list: ArrayList<valoracion>,) : RecyclerView.Adapter<VerReviewAdapter.ViewHolder>()  {
@@ -30,5 +31,6 @@ class VerReviewAdapter(private val context: Context,
         holder.nom.text=data.nom
         holder.valoracion.text=data.valoracion
         //image falta
+        Picasso.with(this.context).load(data.imagen).into(holder.image)
     }
 }

@@ -16,7 +16,7 @@ class VerReviewActivity : AppCompatActivity() {
 
         val db = Firebase.firestore
         val docRef = db.collection("review").document(SharedApp.prefs.email.toString()).collection("menu")
-        var valoracion=valoracion("","","")
+        var valoracion=valoracion("","","","")
         var valoraciones= arrayListOf<valoracion>()
         var i : Int = 0
         docRef
@@ -29,7 +29,7 @@ class VerReviewActivity : AppCompatActivity() {
                             SharedApp.prefs.email.toString(),
                             document.id,
                             document.get("valoracion").toString()+"€",
-                            //document.get("image").toString()+""
+                            document.get("img").toString()+""
                         )
                     )
                 }

@@ -6,11 +6,16 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import com.example.autentdenis.Sharedpref.SharedApp
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
@@ -62,6 +67,7 @@ class ImgActivity : AppCompatActivity() {
                     addUploadRecordToDb(downloadUri.toString())
                 } else {
                     // Handle failures
+                    Toast.makeText(this, "error upload", Toast.LENGTH_LONG).show()
                 }
             }?.addOnFailureListener{
 
@@ -76,6 +82,21 @@ class ImgActivity : AppCompatActivity() {
 
         val data = HashMap<String, Any>()
         data["imageUrl"] = uri
+
+        //val db = Firebase.firestore
+        val database = db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
+        val img = hashMapOf(
+            "img" to uri
+        )
+        database.update(img as Map<String, String>)
+            .addOnSuccessListener {
+                Log.d(
+                    "TAG",
+                    "DocumentSnapshot successfully written!"
+                )
+            }
+            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+
 
         db.collection("posts")
             .add(data)
@@ -95,12 +116,13 @@ class ImgActivity : AppCompatActivity() {
             }
 
             filePath = data.data
-            try {
-//                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
+            Toast.makeText(this, "Select", Toast.LENGTH_LONG).show()
+            /*try {
+                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
 //                uploadImage.setImageBitmap(bitmap)
             } catch (e: IOException) {
                 e.printStackTrace()
-            }
+            }*/
         }
     }
 }

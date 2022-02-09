@@ -90,6 +90,8 @@ class LoggedActivity : AppCompatActivity() {
             binding.editTextTextPersonName2.setText(it.result?.get("edad") as String?)
             Picasso.with(this).load(it.result?.get("img") as String?).into(binding.imageView2)
         }
+        SharedApp.prefs.perfilname=binding.editTextTextPersonName.text.toString()
+        SharedApp.prefs.perfiledad=binding.editTextTextPersonName2.text.toString()
     }
     fun crear(user: HashMap<String,String>){
         val db = Firebase.firestore

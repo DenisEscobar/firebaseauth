@@ -18,4 +18,10 @@ class Prefes (context: Context) {
     var perfil: String?
         get() = prefs.getString("shared_perfil", "")
         set(value) = prefs.edit().putString("shared_perfil", value).apply()
+    var perfilname: String?
+        get() = prefs.getString("shared_perfilname", "")
+        set(value) = prefs.edit().putString("shared_perfilname", value).apply()
+    var perfiledad: String?
+        get() = prefs.getString("shared_perfiledad", "")
+        set(value) = prefs.edit().putString("shared_perfiledad", value).apply()
 }

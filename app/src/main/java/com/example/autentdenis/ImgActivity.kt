@@ -89,13 +89,13 @@ class ImgActivity : AppCompatActivity() {
         if(SharedApp.prefs.perfil=="1"){
             val db = Firebase.firestore
             var correu = SharedApp.prefs.email
-            var nom=""
-            var edad=""
-            if(correu!=null)
-                db.collection("Users").document(correu).get().addOnCompleteListener{
-                    nom = it.result?.get("nom") as String
-                    edad = it.result?.get("edad") as String
-                }
+            var nom=SharedApp.prefs.perfilname
+            var edad=SharedApp.prefs.perfiledad
+//            if(correu!=null)
+//                db.collection("Users").document(SharedApp.prefs.email!!).get().addOnCompleteListener{
+//                    nom = it.result?.get("nom") as String
+//                    edad = it.result?.get("edad") as String
+//                }
             val database = db.collection("Users").document(SharedApp.prefs.email!!)
             val img = hashMapOf(
                 "nom" to nom,
@@ -146,7 +146,7 @@ class ImgActivity : AppCompatActivity() {
             }
             filePath = data.data
             Toast.makeText(this, "Select", Toast.LENGTH_LONG).show()
-            
+
             val img = findViewById<ImageView>(R.id.image_preview)
             Picasso.with(this).load(filePath).into(img)
         }

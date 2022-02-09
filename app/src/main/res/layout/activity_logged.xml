@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="edad"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:minHeight="48dp"
             app:layout_constraintBottom_toTopOf="@+id/creardocumento"
             app:layout_constraintEnd_toEndOf="parent"

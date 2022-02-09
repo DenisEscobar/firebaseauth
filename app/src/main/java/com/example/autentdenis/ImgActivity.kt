@@ -9,6 +9,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.autentdenis.Sharedpref.SharedApp
 import com.google.android.gms.tasks.Continuation
@@ -19,6 +20,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
+import com.squareup.picasso.Picasso
 import java.io.IOException
 import java.util.*
 
@@ -84,19 +86,47 @@ class ImgActivity : AppCompatActivity() {
         data["imageUrl"] = uri
 
         //val db = Firebase.firestore
-        val database = db.collection("review").document(SharedApp.prefs.email!!).collection("menu").document(SharedApp.prefs.name.toString()!!)
-        val img = hashMapOf(
-            "img" to uri
-        )
-        database.update(img as Map<String, String>)
-            .addOnSuccessListener {
-                Log.d(
-                    "TAG",
-                    "DocumentSnapshot successfully written!"
-                )
-            }
-            .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+        if(SharedApp.prefs.perfil=="1"){
+            val db = Firebase.firestore
+            var correu = SharedApp.prefs.email
+            var nom=""
+            var edad=""
+            if(correu!=null)
+                db.collection("Users").document(correu).get().addOnCompleteListener{
+                    nom = it.result?.get("nom") as String
+                    edad = it.result?.get("edad") as String
+                }
+            val database = db.collection("Users").document(SharedApp.prefs.email!!)
+            val img = hashMapOf(
+                "nom" to nom,
+                "img" to uri,
+                "edad" to edad
+            )
+            database.set(img as Map<String, String>)
+                .addOnSuccessListener {
+                    Log.d(
+                        "TAG",
+                        "DocumentSnapshot successfully written!"
+                    )
+                }
+                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
 
+        }else {
+            val database =
+                db.collection("review").document(SharedApp.prefs.email!!).collection("menu")
+                    .document(SharedApp.prefs.name.toString()!!)
+            val img = hashMapOf(
+                "img" to uri
+            )
+            database.update(img as Map<String, String>)
+                .addOnSuccessListener {
+                    Log.d(
+                        "TAG",
+                        "DocumentSnapshot successfully written!"
+                    )
+                }
+                .addOnFailureListener { e -> Log.w("TAG", "Error writing document", e) }
+        }
 
         db.collection("posts")
             .add(data)
@@ -114,15 +144,11 @@ class ImgActivity : AppCompatActivity() {
             if(data == null || data.data == null){
                 return
             }
-
             filePath = data.data
             Toast.makeText(this, "Select", Toast.LENGTH_LONG).show()
-            /*try {
-                val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
-//                uploadImage.setImageBitmap(bitmap)
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }*/
+            
+            val img = findViewById<ImageView>(R.id.image_preview)
+            Picasso.with(this).load(filePath).into(img)
         }
     }
 }

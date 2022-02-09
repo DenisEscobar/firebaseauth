@@ -1,15 +1,17 @@
 package com.example.autentdenis
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.autentdenis.Sharedpref.SharedApp
 import com.example.autentdenis.databinding.ActivityLoggedBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import java.util.HashMap
+import com.squareup.picasso.Picasso
+import java.util.*
 
 class LoggedActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoggedBinding
@@ -19,6 +21,12 @@ class LoggedActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_logged)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_logged)
         buscar()
+
+        binding.button2.setOnClickListener {
+            SharedApp.prefs.perfil="1"
+            val intent= Intent(this, ImgActivity::class.java)
+            startActivity(intent)
+        }
         binding.creardocumento.setOnClickListener {
             var nom = binding.editTextTextPersonName.text.toString()
             var edad = binding.editTextTextPersonName2.text.toString()
@@ -27,6 +35,7 @@ class LoggedActivity : AppCompatActivity() {
                 "edad" to edad,
             )
             crear(user)
+            buscar()
 //            if(!(binding.editTextTextPersonDocument.text.toString().isEmpty())) {
 //                if (!(binding.editTextTextPersonName.text.toString()
 //                        .isEmpty() && binding.editTextTextPersonName2.text.toString().isEmpty())
@@ -63,8 +72,12 @@ class LoggedActivity : AppCompatActivity() {
                 "edad" to edad,
             )
             modificar(user)
+            buscar()
         }
-        binding.borrardocumento.setOnClickListener { borrar() }
+        binding.borrardocumento.setOnClickListener {
+            borrar()
+            buscar()
+        }
 
     }
     fun buscar(){
@@ -75,6 +88,7 @@ class LoggedActivity : AppCompatActivity() {
         db.collection("Users").document(correu).get().addOnCompleteListener{
             binding.editTextTextPersonName.setText(it.result?.get("nom") as String?)
             binding.editTextTextPersonName2.setText(it.result?.get("edad") as String?)
+            Picasso.with(this).load(it.result?.get("img") as String?).into(binding.imageView2)
         }
     }
     fun crear(user: HashMap<String,String>){
@@ -108,5 +122,11 @@ class LoggedActivity : AppCompatActivity() {
         db.collection("Users").document(binding.textViewemailpersonal.text.toString())
             .delete()
             .addOnSuccessListener {}
+    }
+    override fun onResume() {
+        // After a pause OR at startup
+        buscar()
+        super.onResume()
+        //Refresh your stuff here
     }
 }

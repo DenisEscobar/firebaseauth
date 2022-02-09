@@ -15,4 +15,7 @@ class Prefes (context: Context) {
         get() = prefs.getString("shared_email", "")
         set(value) = prefs.edit().putString("shared_email", value).apply()
 
+    var perfil: String?
+        get() = prefs.getString("shared_perfil", "")
+        set(value) = prefs.edit().putString("shared_perfil", value).apply()
 }

@@ -42,6 +42,7 @@ class ReviewActivity : AppCompatActivity() {
         }
         val foto = findViewById<Button>(R.id.buttonfoto)
         foto.setOnClickListener {
+            SharedApp.prefs.perfil="0"
             val intent= Intent(this, ImgActivity::class.java)
             startActivity(intent)
         }
